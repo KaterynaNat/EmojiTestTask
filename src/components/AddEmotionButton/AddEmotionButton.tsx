@@ -1,6 +1,7 @@
+"use client";
 import { useState } from "react";
 import styles from "./AddEmotionButton.module.css";
-import EmotionModal from "";
+import EmotionModal from "@/src/components/EmotionModal/EmotionModal";
 
 export default function AddEmotionButton() {
   const [open, setOpen] = useState(false);

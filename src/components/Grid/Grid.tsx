@@ -1,9 +1,12 @@
-import { observer } from "mobx-react-lite";
-import { emotionsStore } from "";
-import EmotionCard from "";
-import styles from "./BoardGrid.module.css";
+"use client";
 
-export default function Grid() {
+import React from "react";
+import { observer } from "mobx-react-lite";
+import { emotionsStore } from "@/src/stores/emotions.store";
+import EmotionCard from "@/src/components/EmotionCard/EmotionCard";
+import styles from "./Grid.module.css";
+
+function GridInner() {
   const items = emotionsStore.filtered;
   return (
     <div className={styles.grid}>
@@ -13,3 +16,8 @@ export default function Grid() {
     </div>
   );
 }
+
+const Grid = observer(GridInner);
+Grid.displayName = "Grid";
+
+export default Grid;

@@ -1,19 +1,20 @@
+"use client";
 import { useState } from "react";
 import styles from "./EmotionModal.module.css";
-import { emotionsStore } from "";
-import type { EmotionType } from "";
+import { emotionsStore } from "@/src/stores/emotions.store";
+import type { EmotionType } from "@/src/types/emotion";
 
 const EMOTIONS: EmotionType[] = [
   "Joy",
   "Sadness",
   "Anger",
-  "Surprice",
+  "Surprise",
   "Calm",
   "Other",
 ];
 
 export default function EmotionModal({ onClose }: { onClose: () => void }) {
-  const [type, setType] = useState<EmotionType>("Радість");
+  const [type, setType] = useState<EmotionType>("Joy");
   const [comment, setComment] = useState("");
 
   const submit = () => {
@@ -50,14 +51,15 @@ export default function EmotionModal({ onClose }: { onClose: () => void }) {
           rows={3}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
+          placeholder="How do you feel today?"
         />
 
         <div className={styles.actions}>
           <button className={styles.secondary} onClick={onClose}>
-            Decline
+            Cancel
           </button>
           <button className={styles.primary} onClick={submit}>
-            Accept
+            Confirm
           </button>
         </div>
       </div>

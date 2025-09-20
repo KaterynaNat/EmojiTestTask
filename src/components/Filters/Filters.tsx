@@ -1,19 +1,21 @@
-import { emotionsStore, type PeriodFilter } from "@/stores/emotions.store";
-import styles from "./Filters.module.css";
-import { observer } from "mobx-react-lite";
+"use client";
 
-const filters: { key: PeriodFilter; label: string }[] = [
+import { observer } from "mobx-react-lite";
+import { emotionsStore, type PeriodFilter } from "@/src/stores/emotions.store";
+import styles from "./Filters.module.css";
+
+const FILTERS: ReadonlyArray<{ key: PeriodFilter; label: string }> = [
   { key: "ALL", label: "All" },
   { key: "TODAY", label: "Today" },
   { key: "WEEK", label: "Week" },
   { key: "MONTH", label: "Month" },
 ];
 
-export default function Filters() {
+function FiltersInner() {
   return (
     <div className={styles.wrap}>
       <div className={styles.group}>
-        {filters.map((f) => (
+        {FILTERS.map((f) => (
           <button
             key={f.key}
             className={`${styles.btn} ${
@@ -25,6 +27,7 @@ export default function Filters() {
           </button>
         ))}
       </div>
+
       <button
         className={styles.clear}
         onClick={() => {
@@ -36,3 +39,8 @@ export default function Filters() {
     </div>
   );
 }
+
+const Filters = observer(FiltersInner);
+Filters.displayName = "Filters";
+
+export default Filters;

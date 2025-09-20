@@ -1,8 +1,12 @@
+"use client";
+
+import React from "react";
 import {
   DndContext,
   PointerSensor,
   useSensor,
   useSensors,
+  DragEndEvent,
 } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -11,10 +15,10 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { observer } from "mobx-react-lite";
-import { emotionsStore } from "";
-import EmotionCard from "";
-import Swipeable from "";
-import styles from "./BoardListSortable.module.css";
+import { emotionsStore } from "@/src/stores/emotions.store";
+import EmotionCard from "@/src/components/EmotionCard/EmotionCard";
+import Swipeable from "@/src/components/Swipeable/Swipeable";
+import styles from "./BoardList.module.css";
 
 function Row({
   id,
@@ -41,7 +45,7 @@ function Row({
   );
 }
 
-export default function BoardList() {
+function BoardListInner() {
   const items = emotionsStore.filtered;
   const sensors = useSensors(useSensor(PointerSensor));
 
@@ -78,3 +82,6 @@ export default function BoardList() {
     </div>
   );
 }
+
+const BoardList = observer(BoardListInner);
+export default BoardList;

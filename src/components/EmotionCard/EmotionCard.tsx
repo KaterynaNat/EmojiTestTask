@@ -1,5 +1,6 @@
-import { EmotionItem } from "";
-import { emotionsStore } from "";
+"use client";
+import { EmotionItem } from "@/src/types/emotion";
+import { emotionsStore } from "@/src/stores/emotions.store";
 import styles from "./EmotionCard.module.css";
 
 const colorClass: Record<string, string> = {
