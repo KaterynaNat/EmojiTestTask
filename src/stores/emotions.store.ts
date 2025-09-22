@@ -1,8 +1,8 @@
 "use client";
 import { makeAutoObservable, reaction } from "mobx";
-import { EmotionItem, EmotionType } from "@/src/types/emotion";
-import { loadEmotions, saveEmotions } from "@/src/lib/persistence";
-import { inLastDays, inToday } from "@/src/lib/date";
+import { EmotionItem, EmotionType } from "@/types/emotion";
+import { loadEmotions, saveEmotions } from "@/lib/persistence";
+import { inLastDays, inToday } from "@/lib/date";
 
 export type PeriodFilter = "ALL" | "TODAY" | "WEEK" | "MONTH";
 

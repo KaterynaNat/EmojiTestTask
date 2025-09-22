@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import styles from "./EmotionModal.module.css";
-import { emotionsStore } from "@/src/stores/emotions.store";
-import type { EmotionType } from "@/src/types/emotion";
+import { emotionsStore } from "@/stores/emotions.store";
+import type { EmotionType } from "@/types/emotion";
 
 const EMOTIONS: EmotionType[] = [
   "Joy",

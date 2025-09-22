@@ -15,9 +15,9 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { observer } from "mobx-react-lite";
-import { emotionsStore } from "@/src/stores/emotions.store";
-import EmotionCard from "@/src/components/EmotionCard/EmotionCard";
-import Swipeable from "@/src/components/Swipeable/Swipeable";
+import { emotionsStore } from "@/stores/emotions.store";
+import EmotionCard from "@/components/EmotionCard/EmotionCard";
+import Swipeable from "@/components/Swipeable/Swipeable";
 import styles from "./BoardList.module.css";
 
 function Row({

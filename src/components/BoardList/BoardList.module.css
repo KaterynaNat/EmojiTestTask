@@ -1,0 +1,12 @@
+.list {
+  display: block;
+}
+.item {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .list {
+    display: none;
+  }
+}

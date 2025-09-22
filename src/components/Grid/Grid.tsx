@@ -2,8 +2,8 @@
 
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { emotionsStore } from "@/src/stores/emotions.store";
-import EmotionCard from "@/src/components/EmotionCard/EmotionCard";
+import { emotionsStore } from "@/stores/emotions.store";
+import EmotionCard from "@/components/EmotionCard/EmotionCard";
 import styles from "./Grid.module.css";
 
 function GridInner() {

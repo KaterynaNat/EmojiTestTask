@@ -1,7 +1,7 @@
 "use client";
 
 import { observer } from "mobx-react-lite";
-import { emotionsStore, type PeriodFilter } from "@/src/stores/emotions.store";
+import { emotionsStore, type PeriodFilter } from "@/stores/emotions.store";
 import styles from "./Filters.module.css";
 
 const FILTERS: ReadonlyArray<{ key: PeriodFilter; label: string }> = [

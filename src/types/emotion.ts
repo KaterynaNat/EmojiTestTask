@@ -4,8 +4,10 @@ export type EmotionType =
   | "Anger"
   | "Surprise"
   | "Calm"
+  | "Irritation"
+  | "Gloom"
+  | "Sleepiness"
   | "Other";
-
 export interface EmotionItem {
   id: string;
   type: EmotionType;

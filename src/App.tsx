@@ -1,10 +1,10 @@
 "use client";
 
 import { observer } from "mobx-react-lite";
-import AddEmotionButton from "@/src/components/AddEmotionButton/AddEmotionButton";
-import Filters from "@/src/components/Filters/Filters";
-import Grid from "@/src/components/Grid/Grid";
-import BoardList from "@/src/components/BoardList/BoardList";
+import AddEmotionButton from "@/components/AddEmotionButton/AddEmotionButton";
+import Filters from "@/components/Filters/Filters";
+import Grid from "@/components/Grid/Grid";
+import BoardList from "@/components/BoardList/BoardList";
 import styles from "./App.module.css";
 
 function AppInner() {

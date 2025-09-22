@@ -1,0 +1,25 @@
+.wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.delete {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 100px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--grad-candy);
+  background-size: 200% 200%;
+  animation: shimmer 5s linear infinite;
+}
+.content {
+  transition: transform 0.15s ease;
+}
+@media (min-width: 768px) {
+  .delete {
+    display: none;
+  }
+}
