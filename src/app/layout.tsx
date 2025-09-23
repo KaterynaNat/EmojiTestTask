@@ -1,7 +1,7 @@
 // app/layout.tsx
 /* eslint-disable react-refresh/only-export-components */
 
-import "./globals.css";
+import "../styles/global.css";
 import type { ReactNode } from "react";
 
 export const metadata = { title: "Emotions Board" };
