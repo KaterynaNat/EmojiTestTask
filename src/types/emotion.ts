@@ -3,7 +3,7 @@ export type EmotionType =
   | "Sadness"
   | "Anger"
   | "Surprise"
-  | "Calm"
+  | "Nervous"
   | "Irritation"
   | "Gloom"
   | "Sleepiness"

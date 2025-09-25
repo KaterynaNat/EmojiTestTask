@@ -4,9 +4,13 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { emotionsStore } from "@/stores/emotions.store";
 import EmotionCard from "@/components/EmotionCard/EmotionCard";
+import { useHydrated } from "@/lib/useHydrated";
 import styles from "./Grid.module.css";
 
 function GridInner() {
+  const hydrated = useHydrated();
+  if (!hydrated) return null;
+
   const items = emotionsStore.filtered;
   return (
     <div className={styles.grid}>
@@ -19,5 +23,4 @@ function GridInner() {
 
 const Grid = observer(GridInner);
 Grid.displayName = "Grid";
-
 export default Grid;

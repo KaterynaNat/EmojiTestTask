@@ -1,55 +1,68 @@
 "use client";
 
 import { EmotionItem } from "@/types/emotion";
-import { emotionsStore } from "@/stores/emotions.store";
 import styles from "./EmotionCard.module.css";
 
-const colorClass: Record<string, string> = {
+const bgClass: Record<string, string> = {
   Joy: styles.y,
   Sadness: styles.b,
   Anger: styles.r,
   Surprise: styles.p,
-  Calm: styles.g,
+  Nervous: styles.g,
   Irritation: styles.o,
   Gloom: styles.d,
   Sleepiness: styles.v,
   Other: styles.gray,
 };
 
-export default function EmotionCard({ item }: { item: EmotionItem }) {
+const emojiFor = (t: string) =>
+  t === "Joy"
+    ? "😊"
+    : t === "Sadness"
+    ? "😔"
+    : t === "Anger"
+    ? "😤"
+    : t === "Surprise"
+    ? "😮"
+    : t === "Nervous"
+    ? "😰"
+    : t === "Irritation"
+    ? "😣"
+    : t === "Gloom"
+    ? "🌧️"
+    : t === "Sleepiness"
+    ? "😴"
+    : "🫧";
+
+type Props = { item: EmotionItem; onRemove?: () => void };
+
+export default function EmotionCard({ item, onRemove }: Props) {
   return (
-    <div
-      className={`${styles.card} ${colorClass[item.type] ?? styles.gray}`}
-      data-emoji={
-        item.type === "Joy"
-          ? "😊"
-          : item.type === "Sadness"
-          ? "😔"
-          : item.type === "Anger"
-          ? "😤"
-          : item.type === "Surprise"
-          ? "😮"
-          : item.type === "Calm"
-          ? "😌"
-          : item.type === "Irritation"
-          ? "😣"
-          : item.type === "Gloom"
-          ? "🌧️"
-          : item.type === "Sleepiness"
-          ? "😴"
-          : "🫧"
-      }
-    >
-      <div className={styles.head}>
-        <div className={styles.title}>{item.type}</div>
+    <div className={`${styles.card} ${bgClass[item.type] ?? styles.gray}`}>
+      {}
+      <div className={styles.top}>
         <button
+          type="button"
           className={styles.delBtn}
-          onClick={() => emotionsStore.remove(item.id)}
+          aria-label="Remove"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onRemove?.();
+          }}
         >
-          Remove
+          ×
         </button>
       </div>
-      <div className={styles.comment}>{item.comment || "—"}</div>
+
+      {}
+      <div className={styles.media} />
+
+      {}
+      <div className={styles.bottom}>
+        <span className={styles.emoji}>{emojiFor(item.type)}</span>
+        <p className={styles.comment}>{item.comment || "—"}</p>
+      </div>
     </div>
   );
 }

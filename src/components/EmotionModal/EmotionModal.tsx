@@ -9,7 +9,7 @@ const EMOTIONS: EmotionType[] = [
   "Sadness",
   "Anger",
   "Surprise",
-  "Calm",
+  "Nervous",
   "Other",
 ];
 

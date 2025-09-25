@@ -2,6 +2,7 @@
 
 import { observer } from "mobx-react-lite";
 import { emotionsStore, type PeriodFilter } from "@/stores/emotions.store";
+import { useHydrated } from "@/lib/useHydrated";
 import styles from "./Filters.module.css";
 
 const FILTERS: ReadonlyArray<{ key: PeriodFilter; label: string }> = [
@@ -12,6 +13,9 @@ const FILTERS: ReadonlyArray<{ key: PeriodFilter; label: string }> = [
 ];
 
 function FiltersInner() {
+  const hydrated = useHydrated();
+  if (!hydrated) return null;
+
   return (
     <div className={styles.wrap}>
       <div className={styles.group}>
@@ -42,5 +46,4 @@ function FiltersInner() {
 
 const Filters = observer(FiltersInner);
 Filters.displayName = "Filters";
-
 export default Filters;

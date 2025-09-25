@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import {
   DndContext,
   PointerSensor,
@@ -18,6 +18,7 @@ import { observer } from "mobx-react-lite";
 import { emotionsStore } from "@/stores/emotions.store";
 import EmotionCard from "@/components/EmotionCard/EmotionCard";
 import Swipeable from "@/components/Swipeable/Swipeable";
+import { useHydrated } from "@/lib/useHydrated";
 import styles from "./BoardList.module.css";
 
 function Row({
@@ -31,7 +32,12 @@ function Row({
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
-  const style = { transform: CSS.Transform.toString(transform), transition };
+
+  const style: React.CSSProperties = {
+    transform: transform ? CSS.Transform.toString(transform) : undefined,
+    transition: transition ?? undefined,
+  };
+
   return (
     <div
       ref={setNodeRef}
@@ -46,20 +52,35 @@ function Row({
 }
 
 function BoardListInner() {
+  const hydrated = useHydrated();
   const items = emotionsStore.filtered;
+
   const sensors = useSensors(useSensor(PointerSensor));
 
-  const onDragEnd = (e: DragEndEvent) => {
-    const { active, over } = e;
-    if (!over || active.id === over.id) return;
-    const ids = items.map((i) => i.id);
-    const from = ids.indexOf(String(active.id));
-    const to = ids.indexOf(String(over.id));
-    if (from < 0 || to < 0) return;
-    const next = [...ids];
-    next.splice(to, 0, next.splice(from, 1)[0]);
-    emotionsStore.reorder(next);
-  };
+  const safeRemove = useCallback((id: string) => {
+    requestAnimationFrame(() => {
+      setTimeout(() => emotionsStore.remove(id), 0);
+    });
+  }, []);
+
+  const onDragEnd = useCallback(
+    (e: DragEndEvent) => {
+      const { active, over } = e;
+      if (!over || active.id === over.id) return;
+
+      const ids = items.map((i) => i.id);
+      const from = ids.indexOf(String(active.id));
+      const to = ids.indexOf(String(over.id));
+      if (from < 0 || to < 0) return;
+
+      const next = [...ids];
+      next.splice(to, 0, next.splice(from, 1)[0]);
+      emotionsStore.reorder(next);
+    },
+    [items]
+  );
+
+  if (!hydrated) return null;
 
   return (
     <div className={styles.list}>
@@ -69,12 +90,8 @@ function BoardListInner() {
           strategy={verticalListSortingStrategy}
         >
           {items.map((i) => (
-            <Row
-              key={i.id}
-              id={i.id}
-              onSwipe={() => emotionsStore.remove(i.id)}
-            >
-              <EmotionCard item={i} />
+            <Row key={i.id} id={i.id} onSwipe={() => safeRemove(i.id)}>
+              <EmotionCard item={i} onRemove={() => safeRemove(i.id)} />
             </Row>
           ))}
         </SortableContext>
@@ -84,4 +101,5 @@ function BoardListInner() {
 }
 
 const BoardList = observer(BoardListInner);
+BoardList.displayName = "BoardList";
 export default BoardList;

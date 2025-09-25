@@ -17,9 +17,9 @@
 
 .btn {
   padding: 6px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
   background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
   cursor: pointer;
   transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease;
 }
@@ -28,11 +28,12 @@
 }
 
 .active {
-  color: #111;
-  border-color: transparent;
-  background: var(--grad-ocean);
+  background-image: var(--grad-ocean);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-origin: border-box;
+  border: 1px solid transparent;
   color: #fff;
-  box-shadow: 0 8px 22px rgba(42, 123, 155, 0.25);
 }
 
 .clear {

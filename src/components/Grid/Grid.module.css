@@ -4,7 +4,7 @@
 @media (min-width: 768px) {
   .grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(3, minmax(0, 10fr));
+    gap: 16px;
   }
 }

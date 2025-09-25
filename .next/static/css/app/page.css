@@ -116,9 +116,9 @@
 
 .Filters_btn__KMrYg {
   padding: 6px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
   background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
   cursor: pointer;
   transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease;
 }
@@ -127,11 +127,12 @@
 }
 
 .Filters_active__SMae7 {
-  color: #111;
-  border-color: transparent;
-  background: var(--grad-ocean);
+  background-image: var(--grad-ocean);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-origin: border-box;
+  border: 1px solid transparent;
   color: #fff;
-  box-shadow: 0 8px 22px rgba(42, 123, 155, 0.25);
 }
 
 .Filters_clear__bOOdK {
@@ -149,68 +150,163 @@
 .EmotionCard_card__3_cLl {
   position: relative;
   border-radius: 16px;
-  padding: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--border);
-  animation: EmotionCard_pop-in__OV93i 0.12s ease both;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   overflow: hidden;
+  animation: EmotionCard_pop-in__OV93i 0.12s ease both;
+
+  background: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
-.EmotionCard_card__3_cLl::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 6px;
-  width: 100%;
-  background: var(--grad-ocean);
+.EmotionCard_card__3_cLl:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
-.EmotionCard_card__3_cLl::after {
-  content: attr(data-emoji);
-  position: absolute;
-  right: 10px;
-  bottom: 8px;
+
+.EmotionCard_top__yfYJ_ {
+  background: linear-gradient(
+    0deg,
+    rgba(238, 174, 202, 0.6) 0%,
+    rgba(238, 174, 202, 0.25) 100%
+  );
+  padding: 8px 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+.EmotionCard_media__aZh0t {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-grow: 1;
+}
+
+.EmotionCard_bottom__V5eGt {
+  background: linear-gradient(
+    0deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(238, 174, 202, 0.6) 100%
+  );
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+.EmotionCard_emoji__hwNzp {
   font-size: 18px;
-  opacity: 0.9;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
   animation: EmotionCard_float__XyNwF 3.4s ease-in-out infinite;
 }
 
-.EmotionCard_head__xoSFL {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-.EmotionCard_title__WHEOc {
-  font-weight: 700;
-}
 .EmotionCard_comment__Rcea3 {
+  margin: 0;
   font-size: 14px;
   line-height: 1.35;
+  color: var(--ink);
 }
 
 .EmotionCard_delBtn__OC5gc {
-  display: none;
-  padding: 6px 10px;
-  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 50%;
   border: none;
-  background: #ef4444;
   color: #fff;
   cursor: pointer;
+  background: var(--grad-candy);
+  margin-left: auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.EmotionCard_card__3_cLl::before {
-  content: attr(data-emoji);
-  font-size: 2rem;
-  margin-right: 8px;
-  display: inline-block;
-  animation: EmotionCard_pop__KLcUM 0.4s ease-in-out;
+.EmotionCard_delBtn__OC5gc:hover {
+  transform: scale(1.08);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
-@keyframes EmotionCard_pop__KLcUM {
+.EmotionCard_y__KHthL .EmotionCard_media__aZh0t {
+  background-image: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.18)
+    ),
+    url("/img/Joy.png");
+}
+.EmotionCard_b__6S8MC .EmotionCard_media__aZh0t {
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.1)
+    ),
+    url("/img/Sadness.png");
+}
+.EmotionCard_r__DxTiH .EmotionCard_media__aZh0t {
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.1)
+    ),
+    url("/img/Anger.png");
+}
+.EmotionCard_p__8O0Eh .EmotionCard_media__aZh0t {
+  background-image: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0.16)
+    ),
+    url("/img/Surprise.png");
+}
+.EmotionCard_g__WW5jK .EmotionCard_media__aZh0t {
+  background-image: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.12)
+    ),
+    url("/img/Nervous.png");
+}
+.EmotionCard_o__CO4gQ .EmotionCard_media__aZh0t {
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.12),
+      rgba(0, 0, 0, 0.12)
+    ),
+    url("/img/Irritation.png");
+}
+.EmotionCard_d__JOOr7 .EmotionCard_media__aZh0t {
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15)
+    ),
+    url("/img/Gloom.png");
+}
+.EmotionCard_v__1u0Lw .EmotionCard_media__aZh0t {
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.1)
+    ),
+    url("/img/Sleepiness.png");
+}
+.EmotionCard_gray__Nzexb .EmotionCard_media__aZh0t {
+  background-image: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.12)
+  );
+}
+
+@keyframes EmotionCard_pop-in__OV93i {
   0% {
-    transform: scale(0.5);
+    transform: scale(0.96);
     opacity: 0;
   }
   100% {
@@ -218,78 +314,14 @@
     opacity: 1;
   }
 }
-
-@media (min-width: 768px) {
-  .EmotionCard_delBtn__OC5gc {
-    display: inline-block;
+@keyframes EmotionCard_float__XyNwF {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-}
-
-.EmotionCard_y__KHthL {
-  background: var(--joy);
-}
-.EmotionCard_b__6S8MC {
-  background: var(--sadness);
-}
-.EmotionCard_r__DxTiH {
-  background: var(--anger);
-}
-.EmotionCard_p__8O0Eh {
-  background: var(--surprise);
-}
-.EmotionCard_g__WW5jK {
-  background: var(--calm);
-}
-.EmotionCard_o__CO4gQ {
-  background: var(--irritation);
-}
-.EmotionCard_d__JOOr7 {
-  background: var(--gloom);
-}
-.EmotionCard_v__1u0Lw {
-  background: var(--sleepiness);
-}
-.EmotionCard_gray__Nzexb {
-  background: var(--other);
-}
-
-.EmotionCard_y__KHthL {
-  --emoji: "😊";
-}
-.EmotionCard_b__6S8MC {
-  --emoji: "😔";
-}
-.EmotionCard_r__DxTiH {
-  --emoji: "😤";
-}
-.EmotionCard_p__8O0Eh {
-  --emoji: "😮";
-}
-.EmotionCard_g__WW5jK {
-  --emoji: "😌";
-}
-.EmotionCard_o__CO4gQ {
-  --emoji: "😣";
-}
-.EmotionCard_d__JOOr7 {
-  --emoji: "🌧️";
-}
-.EmotionCard_v__1u0Lw {
-  --emoji: "😴";
-}
-.EmotionCard_gray__Nzexb {
-  --emoji: "🫧";
-}
-
-.EmotionCard_card__3_cLl {
-  --emoji-fallback: "🙂";
-}
-.EmotionCard_card__3_cLl::after {
-  content: var(--emoji, var(--emoji-fallback));
-}
-
-.EmotionCard_card__3_cLl:hover::before {
-  background: var(--grad-candy);
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
 /*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
@@ -301,9 +333,9 @@
 @media (min-width: 768px) {
   .Grid_grid__vWN5w {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-gap: 12px;
-    gap: 12px;
+    grid-template-columns: repeat(3, minmax(0, 10fr));
+    grid-gap: 16px;
+    gap: 16px;
   }
 }
 
@@ -356,9 +388,12 @@
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/App.module.css ***!
   \**************************************************************************************************************************************************************************************************************************************************************/
 .App_page___pGpQ {
-max-width: 960px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 16px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 .App_header__Mc9Yc {
   display: flex;
@@ -375,13 +410,11 @@ max-width: 960px;
   margin: 0;
   font-size: 22px;
   font-weight: 800;
-  background: var(--grad-ocean);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #000;
 }
 .App_footer__cYpe3 {
-  margin-top: 20px;
+  margin-top: auto;
+  padding: 20px 0;
   color: var(--muted);
   text-align: center;
 }
