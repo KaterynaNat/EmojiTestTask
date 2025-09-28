@@ -1,10 +1,10 @@
-// app/layout.tsx
-/* eslint-disable react-refresh/only-export-components */
-
 import "../styles/global.css";
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 
-export const metadata = { title: "Emotions Board" };
+export const metadata: Metadata = {
+  title: "Emotions Board",
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
