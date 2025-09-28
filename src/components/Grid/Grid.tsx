@@ -15,7 +15,11 @@ function GridInner() {
   return (
     <div className={styles.grid}>
       {items.map((i) => (
-        <EmotionCard key={i.id} item={i} />
+        <EmotionCard
+          key={i.id}
+          item={i}
+          onRemove={() => emotionsStore.remove(i.id)}
+        />
       ))}
     </div>
   );

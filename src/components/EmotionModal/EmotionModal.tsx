@@ -1,17 +1,10 @@
 "use client";
+
 import { useState } from "react";
 import styles from "./EmotionModal.module.css";
 import { emotionsStore } from "@/stores/emotions.store";
 import type { EmotionType } from "@/types/emotion";
-
-const EMOTIONS: EmotionType[] = [
-  "Joy",
-  "Sadness",
-  "Anger",
-  "Surprise",
-  "Nervous",
-  "Other",
-];
+import EmotionSelect from "@/components/EmotionModal/EmotionSelect";
 
 export default function EmotionModal({ onClose }: { onClose: () => void }) {
   const [type, setType] = useState<EmotionType>("Joy");
@@ -27,26 +20,26 @@ export default function EmotionModal({ onClose }: { onClose: () => void }) {
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
           <h3>New emotion</h3>
-          <button className={styles.icon} onClick={onClose}>
+          <button className={styles.icon} onClick={onClose} aria-label="Close">
             ✕
           </button>
         </div>
 
-        <label className={styles.label}>Emotion</label>
-        <select
-          className={styles.input}
+        <label className={styles.label} htmlFor="emotion-select">
+          Emotion
+        </label>
+        {}
+        <EmotionSelect
           value={type}
-          onChange={(e) => setType(e.target.value as EmotionType)}
-        >
-          {EMOTIONS.map((e) => (
-            <option key={e} value={e}>
-              {e}
-            </option>
-          ))}
-        </select>
+          onChange={setType}
+          className={styles.selectWrap}
+        />
 
-        <label className={styles.label}>Notes</label>
+        <label className={styles.label} htmlFor="notes">
+          Notes
+        </label>
         <textarea
+          id="notes"
           className={styles.textarea}
           rows={3}
           value={comment}

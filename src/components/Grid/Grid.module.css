@@ -1,6 +1,10 @@
 .grid {
-  display: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  align-items: stretch;
 }
+
 @media (min-width: 768px) {
   .grid {
     display: grid;

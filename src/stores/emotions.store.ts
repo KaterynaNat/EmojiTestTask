@@ -9,6 +9,7 @@ export type PeriodFilter = "ALL" | "TODAY" | "WEEK" | "MONTH";
 class EmotionsStore {
   items: EmotionItem[] = [];
   filter: PeriodFilter = "ALL";
+  private justAdded = new Set<string>();
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true });
@@ -33,13 +34,25 @@ class EmotionsStore {
     const maxOrder = this.items.length
       ? Math.max(...this.items.map((i) => i.order))
       : 0;
+    const id = crypto.randomUUID();
     this.items.push({
-      id: crypto.randomUUID(),
+      id,
       type,
       comment: comment.trim(),
       createdAt: now,
       order: maxOrder + 1,
     });
+    this.justAdded.add(id);
+    setTimeout(() => this.justAdded.delete(id), 1200);
+  }
+
+  isJustAdded(id: string) {
+    return this.justAdded.has(id);
+  }
+
+  updateComment(id: string, comment: string) {
+    const it = this.items.find((i) => i.id === id);
+    if (it) it.comment = comment.trim();
   }
 
   remove(id: string) {
@@ -63,16 +76,21 @@ class EmotionsStore {
   }
 
   get filtered() {
-    const arr = [...this.items].sort((a, b) => a.order - b.order);
-    if (this.filter === "TODAY") return arr.filter((i) => inToday(i.createdAt));
-    if (this.filter === "WEEK")
-      return arr.filter((i) => inLastDays(i.createdAt, 7));
-    if (this.filter === "MONTH")
-      return arr.filter((i) => inLastDays(i.createdAt, 30));
-    return arr;
-  }
+  const arr = [...this.items].sort((a, b) => a.order - b.order);
 
-  get statsByType(): Record<EmotionType, number> {
+  if (this.filter === "TODAY")
+    return arr.filter((i) => inToday(i.createdAt));
+
+  if (this.filter === "WEEK")
+    return arr.filter((i) => inLastDays(i.createdAt, 7));
+
+  if (this.filter === "MONTH")
+    return arr.filter((i) => inLastDays(i.createdAt, 30));
+
+  return arr;
+}
+
+  get statsByType() {
     return this.items.reduce((acc, it) => {
       acc[it.type] = (acc[it.type] ?? 0) + 1;
       return acc;

@@ -54,11 +54,9 @@ body {
     "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color: var(--ink);
 
-  /* базовий колір як fallback, якщо картинка не підвантажилась */
   background: var(--ivory);
 }
 
-/* напівпрозорий фон: градієнт + картинка */
 body::before {
   content: "";
   position: fixed;
@@ -76,7 +74,52 @@ body::before {
   pointer-events: none;
 }
 
-/* на мобільних залишаємо ті ж змінні або можна зробити трохи щільнішими */
+
+html[data-tod="morning"] {
+  --bg-overlay-top: rgba(255, 233, 200, 0.62);
+  --bg-overlay-bottom: rgba(255, 210, 230, 0.68);
+
+  --grad-ocean: linear-gradient(90deg, #f0a45b 0%, #ffd36b 50%, #b1e5a0 100%);
+  --grad-blush: linear-gradient(0deg, rgba(255,223,211,1) 0%, rgba(255,241,227,1) 100%);
+  --grad-candy: linear-gradient(90deg, #ffb4b4 0%, #ffd36b 50%, #c2ffd2 100%);
+}
+
+html[data-tod="day"] {
+  --bg-overlay-top: rgba(238, 174, 202, 0.44);
+  --bg-overlay-bottom: rgba(148, 187, 233, 0.44);
+
+  --grad-ocean: linear-gradient(90deg, rgba(42,123,155,1) 0%, rgba(87,199,133,1) 50%, rgba(237,221,83,1) 100%);
+  --grad-blush: linear-gradient(0deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  --grad-candy: linear-gradient(90deg, rgba(176,89,179,1) 0%, rgba(212,125,125,1) 50%, rgba(255,245,107,1) 100%);
+}
+
+html[data-tod="evening"] {
+  --bg-overlay-top: rgba(70, 60, 100, 0.58);
+  --bg-overlay-bottom: rgba(30, 25, 60, 0.68);
+
+  --grad-ocean: linear-gradient(90deg, #3a5c7a 0%, #3f8f7a 50%, #b6a64a 100%);
+  --grad-blush: linear-gradient(0deg, rgba(90,70,110,0.85) 0%, rgba(50,60,110,0.85) 100%);
+  --grad-candy: linear-gradient(90deg, #8a63a6 0%, #b07070 50%, #c8bf70 100%);
+}
+
+body::before,
+.header,
+.btn,
+.card .top,
+.card .bottom {
+  transition: background 300ms ease, background-image 300ms ease, box-shadow 300ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  .header,
+  .btn,
+  .card .top,
+  .card .bottom {
+    transition: none;
+  }
+}
+
 @media (max-width: 768px) {
   :root {
     --bg-overlay-top: rgba(238, 174, 202, 0.44);
@@ -84,7 +127,6 @@ body::before {
   }
 }
 
-/* решта ваших стилів */
 .container {
   max-width: 960px;
   margin: 0 auto;

@@ -30,8 +30,14 @@ function Row({
   children: React.ReactNode;
   onSwipe: () => void;
 }) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    setActivatorNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id });
 
   const style: React.CSSProperties = {
     transform: transform ? CSS.Transform.toString(transform) : undefined,
@@ -43,10 +49,26 @@ function Row({
       ref={setNodeRef}
       style={style}
       className={styles.item}
+      onPointerDownCapture={(e) => {
+        const el = e.target as HTMLElement;
+        if (el.closest("[data-nodrag]")) e.stopPropagation();
+      }}
       {...attributes}
-      {...listeners}
     >
-      <Swipeable onSwipedLeft={onSwipe}>{children}</Swipeable>
+      {}
+      <button
+        className={styles.handle}
+        aria-label="Drag to reorder"
+        ref={setActivatorNodeRef}
+        {...listeners}
+      >
+        ☰
+      </button>
+
+      {}
+      <Swipeable onSwipedLeft={onSwipe}>
+        <div data-nodrag>{children}</div>
+      </Swipeable>
     </div>
   );
 }
@@ -55,7 +77,11 @@ function BoardListInner() {
   const hydrated = useHydrated();
   const items = emotionsStore.filtered;
 
-  const sensors = useSensors(useSensor(PointerSensor));
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { delay: 120, tolerance: 8 },
+    })
+  );
 
   const safeRemove = useCallback((id: string) => {
     requestAnimationFrame(() => {

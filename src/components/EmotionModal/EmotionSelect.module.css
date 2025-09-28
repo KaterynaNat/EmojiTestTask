@@ -1,0 +1,73 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.trigger {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  font: inherit;
+}
+.trigger[data-open] {
+  border-color: #b059b3;
+  box-shadow: 0 0 0 3px rgba(176, 89, 179, 0.25);
+}
+.chev {
+  margin-left: 8px;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+  padding: 6px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 160px;
+  max-height: 280px;
+  overflow-y: auto;
+
+  z-index: 50;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.item:hover {
+  background: color-mix(in oklab, var(--hover) 24%, white);
+}
+.item[aria-selected="true"] {
+  background: color-mix(in oklab, var(--hover) 34%, white);
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--hover);
+  box-shadow: 0 0 0 2px #fff inset, 0 0 0 1px rgba(0, 0, 0, 0.08);
+}

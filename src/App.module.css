@@ -23,6 +23,49 @@
   font-weight: 800;
   color: #000;
 }
+.nav {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.nav [role="tab"] {
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.nav [role="tab"]:hover { transform: translateY(-1px); }
+
+
+.nav [role="tab"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(176, 89, 179, 0.25);
+}
+
+.nav button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.nav button:hover {
+  background: #f5f5f5;
+}
+
+.active {
+  background: var(--grad-candy);
+  color: #58b541;
+  border-color: transparent;
+}
 .footer {
   margin-top: auto;
   padding: 20px 0;
